@@ -1,0 +1,33 @@
+<div class="modal" [id]="'delete' + property.id" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Are you sure you want to delete?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="propertyService.deleteProperty(property.id)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <div class="container">
+    <div class="card">
+      <div class="card-header" *ngIf="property.profile == userService.user.id">
+        <button 
+          class="btn btn-outline-danger" 
+          [attr.data-bs-target]="'#delete' + property.id" 
+          data-bs-toggle="modal">
+          Delete</button><button class="btn" [routerLink]="['/property/edit', property.id]">Edit</button>
+        </div>
+        <div class="card-body" [routerLink]="['/property', property.id]">
+            <img class="card-img-top" [src]="property.image">
+        </div>
+    </div>
+    <div class="card-footer text-center" [routerLink]="['/property', property.id]">
+        {{property.place}}({{property.area}})
+    </div>
+</div>

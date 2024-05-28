@@ -1,0 +1,44 @@
+<div class="modal" [id]="'delete' + property.id" tabindex="-1" *ngIf="property">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Are you sure you want to delete?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+          (click)="propertyService.deleteProperty(property.id)">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container d-flex justify-content-center align-items-center" *ngIf="property">
+  <div class="card mb-3 mt-3">
+    <div class="card-header">
+      <div class="card-header" *ngIf="property.profile == userService.user.id">
+        <button class="btn btn-outline-danger" [attr.data-bs-target]="'#delete' + property.id" data-bs-toggle="modal">
+          Delete</button><button class="btn" [routerLink]="['/property/edit', property.id]">Edit</button>
+      </div>
+    </div>
+    <img class="card-img-top image-fluid" [src]="property.image" alt="Property Image" style="max-width: 500px;">
+    <div class="card-body">
+      <h5 class="card-title">{{ property.place }}</h5>
+      <p class="card-text">Area: {{ property.area }}</p>
+      <p class="card-text">Bedrooms: {{ property.no_of_bedrooms }}</p>
+      <p class="card-text">Bathrooms: {{ property.no_of_bathrooms }}</p>
+      <p class="card-text">Floors: {{ property.no_of_floor }}</p>
+      <p class="card-text">Likes: {{ property.no_of_likes }}</p>
+      <h6 class="card-subtitle mb-2 text-muted">Nearby Amenities:</h6>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let amenity of property.nearby">
+          <strong>{{ amenity.name }}</strong> - {{ amenity.type }} ({{ amenity.location }})
+        </li>
+      </ul>
+    </div>
+    <div class="card-footer">
+      <button class="btn" (click)="addLike()">Like</button>
+      <button class="btn" (click)="addInterest()">I'm Interested</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <form class="col-6" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+            <div class="form-floating my-3">
+                <input type="text" class="form-control" placeholder="Name" formControlName="name">
+                <label for="name">Name</label>
+                <div *ngIf="profileForm.get('name')?.invalid && profileForm.get('name')?.touched" class="text-danger">
+                    Name is required and should be less than 30 characters.
+                </div>
+            </div>
+
+            <div class="form-floating my-3">
+                <input type="text" class="form-control" placeholder="Location" formControlName="location">
+                <label for="location">Location</label>
+                <div *ngIf="profileForm.get('location')?.invalid && profileForm.get('location')?.touched"
+                    class="text-danger">
+                    Location is required and should be less than 50 characters.
+                </div>
+            </div>
+
+            <div class="my-3">
+                <label for="image">Profile Image</label>
+                <input type="file" class="form-control" (change)="onFileChange($event)">
+            </div>
+
+            <div class="form-floating my-3">
+                <input type="text" class="form-control" placeholder="Username" formControlName="username">
+                <label for="username">Username</label>
+                <div *ngIf="profileForm.get('username')?.invalid && profileForm.get('username')?.touched"
+                    class="text-danger">
+                    Username is required.
+                </div>
+            </div>
+
+            <div class="form-floating my-3">
+                <input type="text" class="form-control" placeholder="First Name" formControlName="first_name">
+                <label for="first_name">First Name</label>
+                <div *ngIf="profileForm.get('first_name')?.invalid && profileForm.get('first_name')?.touched"
+                    class="text-danger">
+                    First Name is required.
+                </div>
+            </div>
+
+            <div class="form-floating my-3">
+                <input type="text" class="form-control" placeholder="Last Name" formControlName="last_name">
+                <label for="last_name">Last Name</label>
+                <div *ngIf="profileForm.get('last_name')?.invalid && profileForm.get('last_name')?.touched"
+                    class="text-danger">
+                    Last Name is required.
+                </div>
+            </div>
+
+            <div class="form-floating my-3">
+                <input type="text" class="form-control" placeholder="Last Name" formControlName="email">
+                <label for="email">Email</label>
+                <div *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched"
+                    class="text-danger">
+                    Last Name is required.
+                </div>
+            </div>
+
+            <div class="form-floating my-3">
+                <input type="password" class="form-control" placeholder="Password" formControlName="password">
+                <label for="password">Password</label>
+                <div *ngIf="profileForm.get('password')?.invalid && profileForm.get('password')?.touched"
+                    class="text-danger">
+                    Password is required and should be at least 8 characters.
+                </div>
+            </div>
+
+            <button class="btn btn-secondary" type="submit">Submit</button>
+        </form>
+    </div>
+</div>
