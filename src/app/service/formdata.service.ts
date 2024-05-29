@@ -15,10 +15,16 @@ export class FormDataService{
             let value = formControlObj.value;
             if (value instanceof File) {
               formData.append(key, value, value.name)
-            } else {
+            }
+            else if(value instanceof Array){
+              value.forEach((val, index) => {
+                formData.append(key, val)
+            });
+            
+            }
+             else {
               formData.append(key, value)
             }
-            console.log(key, value)
           }
         )
         return formData;

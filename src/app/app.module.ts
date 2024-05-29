@@ -19,6 +19,7 @@ import { ApiService } from './service/api.service';
 import { AlertComponent } from './alert/alert.component';
 import { AlertService } from './alert/alert.service';
 import { PropertyFilterComponent } from './pages/property/property-filter/property-filter.component';
+import { AddNearbyComponent } from './pages/property/update-property/add-nearby/add-nearby.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { PropertyFilterComponent } from './pages/property/property-filter/proper
     PropertyViewComponent,
     UpdatePropertyComponent,
     AlertComponent,
-    PropertyFilterComponent
+    PropertyFilterComponent,
+    AddNearbyComponent
   ],
   imports: [
     BrowserModule,

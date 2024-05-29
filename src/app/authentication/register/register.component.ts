@@ -30,7 +30,6 @@ export class RegisterComponent {
   ngOnInit() { }
 
   onSubmit(): void {
-    console.log(this.profileForm)
     if (this.profileForm.valid) {
 
     

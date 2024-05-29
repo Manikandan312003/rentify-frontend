@@ -1,34 +1,44 @@
+<app-add-nearby (refresh)="this.fetchNearbyPlaces()"></app-add-nearby>
+
 <div class="d-flex justify-content-center mt-5" *ngIf="propertyForm">
-    <form [formGroup]='propertyForm' (ngSubmit)='submit()'>
-      <div class="form-floating mb-3">
-        <input type="text" class="form-control" placeholder="Place" formControlName='place'>
-        <label for="">Place</label>
+  <form [formGroup]='propertyForm' (ngSubmit)='submit()'>
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" placeholder="Place" formControlName='place'>
+      <label for="">Place</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" placeholder="Area" formControlName='area'>
+      <label for="">Area</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="file" class="form-control" placeholder="Image"
+        (change)="uploadFile($event, propertyForm.get('image'), propertyForm.get('imageUrl'))">
+      <label for="">Image</label>
+      <div class="container card p-3 my-3" *ngIf="propertyForm.get('imageUrl')?.value">
+        <img [src]="propertyForm.get('imageUrl')?.value" class="image-fluid" style="max-width: 300px;">
       </div>
-      <div class="form-floating mb-3">
-        <input type="text" class="form-control" placeholder="Area" formControlName='area'>
-        <label for="">Area</label>
-      </div>
-      <div class="form-floating mb-3">
-        <input type="file" class="form-control" placeholder="Image" (change)="uploadFile($event, propertyForm.get('image'), propertyForm.get('imageUrl'))">
-        <label for="">Image</label>
-        <div class="container card p-3 my-3" *ngIf="propertyForm.get('imageUrl')?.value">
-          <img [src]="propertyForm.get('imageUrl')?.value" class="image-fluid" style="max-width: 300px;">
-        </div>
-      </div>
-      <div class="form-floating mb-3">
-        <input type="number" class="form-control" placeholder="Number of Bedrooms" formControlName='no_of_bedrooms'>
-        <label for="">Number of Bedrooms</label>
-      </div>
-      <div class="form-floating mb-3">
-        <input type="number" class="form-control" placeholder="Number of Bathrooms" formControlName='no_of_bathrooms'>
-        <label for="">Number of Bathrooms</label>
-      </div>
-      <div class="form-floating mb-3">
-        <input type="number" class="form-control" placeholder="Number of Floors" formControlName='no_of_floor'>
-        <label for="">Number of Floors</label>
-      </div>
-      
-      <button class="btn btn-primary">Submit</button>
-    </form>
-  </div>
-  
+    </div>
+    <div class="form-floating mb-3">
+      <input type="number" class="form-control" placeholder="Number of Bedrooms" formControlName='no_of_bedrooms'>
+      <label for="">Number of Bedrooms</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="number" class="form-control" placeholder="Number of Bathrooms" formControlName='no_of_bathrooms'>
+      <label for="">Number of Bathrooms</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="number" class="form-control" placeholder="Number of Floors" formControlName='no_of_floor'>
+      <label for="">Number of Floors</label>
+    </div>
+    <div *ngFor="let nearby of nearbyPlaces">
+      <label>
+        <input type="checkbox" [value]="nearby.id" (change)="toggleNearbySelection(nearby.id)" [checked]="selectedNearbyIds.includes(nearby.id)" >
+    
+        {{ nearby.name }} - {{ nearby.type }} - {{ nearby.location }}
+      </label>
+    </div>
+    <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#addnearby">Add
+      Nearby</button>
+    <button class="btn btn-primary">Submit</button>
+  </form>
+</div>

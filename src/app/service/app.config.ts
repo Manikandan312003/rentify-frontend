@@ -22,14 +22,12 @@ export class AppConfig {
                         if(err.status==401){
                             localStorage.removeItem('token')
                         }
-                        // this.router.navigateByUrl('/login')
                         console.error(err);
                         resolve();
                     }
                 );
             } else {
                 resolve();
-                // this.router.navigateByUrl('/login')
             }
         });
     }

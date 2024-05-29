@@ -14,6 +14,11 @@ import { UserService } from 'src/app/service/user.service';
   styleUrls: ['./update-property.component.css']
 })
 export class UpdatePropertyComponent {
+
+  nearbyPlaces: any[] = [];
+  selectedNearbyIds: number[] = [];
+  property: any
+
   propertyForm: FormGroup = this.formBuilder.group({
     place: ['', Validators.required],
     area: ['', Validators.required],
@@ -21,46 +26,90 @@ export class UpdatePropertyComponent {
     imageUrl: ['', Validators.required],
     no_of_bedrooms: ['', Validators.required],
     no_of_bathrooms: ['', Validators.required],
-    no_of_floor: ['', Validators.required]
+    no_of_floor: ['', Validators.required],
+    nearby: [[]]
   });
 
   isEditing = false;
   propertyId!: number;
 
-  constructor(private formBuilder: FormBuilder, public apiService: ApiService,public userService:UserService, private route: ActivatedRoute, private router: Router) {
+  constructor(private formBuilder: FormBuilder, public apiService: ApiService, public userService: UserService, private route: ActivatedRoute, private router: Router) {
     this.route.params.subscribe((params) => {
       if (params['id']) {
         this.isEditing = true;
         this.propertyId = params['id'];
         this.fetchProperty();
       }
+      this.fetchNearbyPlaces()
     });
   }
 
   fetchProperty() {
     this.apiService.get(`property/${this.propertyId}`).subscribe(
       data => {
-        const property = data;
-        if(property.profile!=this.userService.getUser().id){
+        this.property = data;
+        if (this.property.profile != this.userService.getUser().id) {
           AlertService.alertInfo('You have no permission')
           this.router.navigateByUrl('/property')
+          return
         }
+        this.selectCommonNearbyPlaces()
         this.propertyForm.patchValue({
-          'place': property.place,
-          'area': property.area,
-          'no_of_bedrooms': property.no_of_bedrooms,
-          'no_of_bathrooms': property.no_of_bathrooms,
-          'no_of_floor': property.no_of_floor,
-          'image': property.image,
-          'imageUrl': property.image
+          'place': this.property.place,
+          'area': this.property.area,
+          'no_of_bedrooms': this.property.no_of_bedrooms,
+          'no_of_bathrooms': this.property.no_of_bathrooms,
+          'no_of_floor': this.property.no_of_floor,
+          'image': this.property.image,
+          'imageUrl': this.property.image
         });
+
       }
     );
   }
 
+  fetchNearbyPlaces() {
+    this.apiService.get('nearby/').subscribe(
+      (data: any) => {
+        this.nearbyPlaces = data;
+        this.selectCommonNearbyPlaces();
+      },
+      error => {
+        console.error('Error fetching nearby places:', error);
+      }
+    );
+  }
+
+  selectCommonNearbyPlaces() {
+    const commonNearbyIds = this.getCommonNearbyIds();
+    this.selectedNearbyIds = commonNearbyIds;
+  }
+
+  getCommonNearbyIds(): number[] {
+    if (!this.nearbyPlaces || !this.property || !this.property.nearby) {
+      return [];
+    }
+
+    return this.nearbyPlaces
+      .filter(nearby => this.property.nearby.some((propertyNearby: { id: any; }) => propertyNearby.id === nearby.id))
+      .map(nearby => nearby.id);
+  }
+
+
+
+  toggleNearbySelection(id: number) {
+    const index = this.selectedNearbyIds.indexOf(id);
+    if (index > -1) {
+      this.selectedNearbyIds.splice(index, 1);
+    } else {
+      this.selectedNearbyIds.push(id);
+    }
+  }
+
   submit() {
+    this.propertyForm.controls['nearby'].patchValue(this.selectedNearbyIds)
     if (this.isEditing) {
-      if (!(this.propertyForm.controls['image'].value instanceof File)) {
+      if (!(this.propertyForm.controls['image']?.value instanceof File)) {
         this.propertyForm.removeControl('image')
       }
       this.apiService.patch(`property/${this.propertyId}/`, FormDataService.formGrouptoData(this.propertyForm)).subscribe(
@@ -74,12 +123,13 @@ export class UpdatePropertyComponent {
       this.apiService.post(`property/`, FormDataService.formGrouptoData(this.propertyForm)).subscribe(
         data => {
           this.propertyForm.reset()
+          this.router.navigate(['/property', this.propertyId]);
           AlertService.alertSuccess('Successfully Added')
         },
         err => AlertService.alertDanger(err.error.detail)
       );
     }
-    else{
+    else {
       AlertService.alertDanger('Invalid details')
     }
   }

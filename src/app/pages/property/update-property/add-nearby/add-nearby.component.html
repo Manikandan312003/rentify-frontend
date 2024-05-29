@@ -1,0 +1,27 @@
+<div class="modal" id="addnearby">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">Add Nearby Place</div>
+        <div class="modal-body">
+          <form [formGroup]="nearbyForm">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" placeholder="name" formControlName="name">
+              <label>Name</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" placeholder="type" formControlName="type">
+              <label>Type</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" placeholder="location" formControlName="location">
+              <label>Location</label>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+          <button data-bs-dismiss="modal" class="btn btn-success" (click)="addNearby()">Add Nearby</button>
+        </div>
+      </div>
+    </div>
+  </div>

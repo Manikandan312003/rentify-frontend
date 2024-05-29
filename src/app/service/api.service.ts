@@ -11,7 +11,7 @@ export class ApiService {
   headers: HttpHeaders = new HttpHeaders();
 
   constructor(private http: HttpClient) {
-    // this.apiUrl = "https://rentify-production.up.railway.app"
+    this.apiUrl = "https://rentify-production.up.railway.app"
    }
 
   getApiUrl() {
