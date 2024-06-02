@@ -51,11 +51,11 @@
             </div>
 
             <div class="form-floating my-3">
-                <input type="text" class="form-control" placeholder="Last Name" formControlName="email">
+                <input type="text" class="form-control" placeholder="Email" formControlName="email">
                 <label for="email">Email</label>
                 <div *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched"
                     class="text-danger">
-                    Last Name is required.
+                    Email is required.
                 </div>
             </div>
 

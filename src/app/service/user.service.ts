@@ -39,7 +39,7 @@ export class UserService {
 
   addUser(token:string){
     localStorage.setItem('token', token)
-    this.setUserFromStorage()
+    this.getUserfromToken(token)
   }
 
   logout(){

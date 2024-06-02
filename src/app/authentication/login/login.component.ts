@@ -16,7 +16,7 @@ export class LoginComponent {
   }
   loginForm: FormGroup = this.formBuild.group({
     'username': ['', [Validators.required]],
-    'password': ['', [Validators.required, Validators.minLength(8)]]
+    'password': ['', [Validators.required]]
   })
 
   checkLogin(){
@@ -28,11 +28,14 @@ export class LoginComponent {
     if(this.loginForm.valid){
       this.apiService.post('user/login', this.loginForm.value).subscribe(
         (data)=> {
-          this.router.navigateByUrl('/property')
           this.userService.addUser(data.token)
+          this.router.navigateByUrl('/property')
         },
         (error)=> AlertService.alertDanger(error.message)
       )
+    }
+    else{
+      AlertService.alertDanger(`${this.loginForm.errors}`)
     }
   }
 }

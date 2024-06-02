@@ -28,7 +28,7 @@ export class PropertyDetailComponent {
         this.property = data;
       },
       (error) => {
-        console.error('Error:', error);
+        AlertService.alertDanger(error.message)
       }
     );
   }
@@ -38,7 +38,6 @@ export class PropertyDetailComponent {
       (data) => this.loadProperties(this.property.id),
       (err) => {
         if(err.status==400){
-          AlertService.alertDanger('Alert')
           AlertService.alertInfo(err.error)
         }
       }

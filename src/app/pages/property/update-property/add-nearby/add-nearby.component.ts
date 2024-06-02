@@ -22,6 +22,9 @@ export class AddNearbyComponent {
       data => {
         AlertService.alertSuccess('Added successfully')
         this.refresh.emit();
+      },
+      err =>{
+        AlertService.alertDanger(err.message)
       }
     )
   }
