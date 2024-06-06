@@ -1,6 +1,6 @@
 
 
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from 'src/app/alert/alert.service';
@@ -24,9 +24,9 @@ export class UpdatePropertyComponent {
     area: ['', Validators.required],
     image: [null, Validators.required],
     imageUrl: ['', Validators.required],
-    no_of_bedrooms: ['', Validators.required],
-    no_of_bathrooms: ['', Validators.required],
-    no_of_floor: ['', Validators.required],
+    no_of_bedrooms: ['', [Validators.required, Validators.min(0)]],
+    no_of_bathrooms: ['', [Validators.required, Validators.min(0)]],
+    no_of_floor: ['', [Validators.required, Validators.min(0)]],
     nearby: [[]]
   });
 

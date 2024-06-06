@@ -1,32 +1,39 @@
-<div class="card mt-3">
-    <div class="card-header">Filter Properties</div>
-    <div class="card-body">
+<div class="card mt-3 navbar navbar-expand-md">
+    <button class="navbar-brand btn d-md-none " data-bs-toggle="collapse" data-bs-target="#property-filter-navbar">Filter Properties</button>
+    <div class="navbar-brand d-none d-md-block" >Filter Properties</div>
+
+
+    <!-- <button class="navbar-brand btn" data-bs-toggle="collapse" data-bs-target="#property-filter-navbar">Filter Properties</button> -->
+    <!-- <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#property-filter-navbar">
+        <span class="navbar-toggler-icon"></span>
+    </button> -->
+    <div class="navbar-collapse collapse card-body" id="property-filter-navbar">
         <div class="row">
 
             <div class="form-floating col-md-4 col-sm-6 mb-3">
                 <input type="text" class="form-control" id="searchPlace" placeholder="searchPlace"
                     [(ngModel)]="searchPlace" (input)="applyFilters()">
-                <label for="searchPlace">Search by Place:</label>
+                <label class="ms-2" for="searchPlace">Search by Place</label>
             </div>
             <div class="form-floating col-md-4 col-sm-6 mb-3">
                 <input type="number" class="form-control" id="minBedrooms" placeholder="minBedrooms"
                     [(ngModel)]="minBedrooms" (input)="applyFilters()">
-                <label for="minBedrooms">Minimum Bedrooms:</label>
+                <label class="ms-2" for="minBedrooms">Minimum Bedrooms</label>
             </div>
             <div class="form-floating col-md-4 col-sm-6 mb-3">
                 <input type="number" class="form-control" id="minBathrooms" placeholder="minBathrooms"
                     [(ngModel)]="minBathrooms" (input)="applyFilters()">
-                <label for="minBathrooms">Minimum Bathrooms:</label>
+                <label class="ms-2" for="minBathrooms">Minimum Bathrooms</label>
             </div>
             <div class="form-floating col-md-4 col-sm-6 mb-3">
                 <input type="number" class="form-control" id="minFloors" placeholder="minFloors" [(ngModel)]="minFloors"
                     (input)="applyFilters()">
-                <label for="minFloors">Minimum Floors:</label>
+                <label class="ms-2" for="minFloors">Minimum Floors</label>
             </div>
             <div class="form-floating col-md-4 col-sm-6 mb-3">
                 <input type="text" class="form-control" id="nearby" placeholder="nearby" [(ngModel)]="nearby"
                     (input)="applyFilters()">
-                <label for="nearby">Nearby:</label>
+                <label class="ms-2" for="nearby">Nearby</label>
             </div>
         </div>
     </div>

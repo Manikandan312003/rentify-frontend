@@ -8,9 +8,9 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class PropertyFilterComponent {
   @Output() filtersChanged: EventEmitter<any> = new EventEmitter();
   searchPlace: string = '';
-  minBedrooms: number = 0;
-  minBathrooms: number = 0;
-  minFloors: number = 0;
+  minBedrooms: number |undefined;
+  minBathrooms: number |undefined;
+  minFloors: number |undefined;
   nearby:string = ''
 
   constructor() { }

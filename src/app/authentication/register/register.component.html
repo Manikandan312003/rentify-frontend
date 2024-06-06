@@ -60,7 +60,7 @@
             </div>
 
             <div class="form-floating my-3">
-                <input type="password" class="form-control" placeholder="Password" formControlName="password">
+                <input type="password" placeholder="Password" formcontrolname="password" class="form-control ng-untouched ng-pristine ng-invalid" ng-reflect-name="password" autocomplete="current-password">
                 <label for="password">Password</label>
                 <div *ngIf="profileForm.get('password')?.invalid && profileForm.get('password')?.touched"
                     class="text-danger">

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { ApiService } from 'src/app/service/api.service';
 import { PropertyService } from './property.service';
 import { Subscription } from 'rxjs';
@@ -48,6 +48,13 @@ export class PropertyComponent {
         console.error('Error:', error);
       }
     );
+  }
+
+  @HostListener('window:scroll', [])
+  onScroll(): void {
+    if ((window.innerHeight + window.scrollY) > (document.body.scrollHeight+7)) {
+      this.loadNextPage();
+    }
   }
 
   loadNextPage(): void {
