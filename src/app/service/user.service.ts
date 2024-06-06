@@ -9,7 +9,7 @@ export class UserService {
 
   user: any=null;
   constructor(private apiService: ApiService) {
-    this.setUserFromStorage()
+    // this.setUserFromStorage()
   }
 
   setUser(user: any) {

@@ -1,22 +1,25 @@
-<div class="modal" id="logout" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Are you sure. Do you want to Logout?</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="logout()">Logout</button>
+<div class="container">
+    <div class="modal" id="logout" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Are you sure</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <h6>Do you want to Logout</h6>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="logout()">Logout</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="container">
     <nav class="navbar sticky-top navbar-expand-md bg-light navbar-light mt-2 pe-4">
         <!-- <a class="navbar-brand ms-3">Rentify</a> -->
-        <img class="navbar-brand" src="assets/rentify.png" class="rounded" [routerLink]="['/property']" class="navbar-brand ms-3"
-            alt="Rentify Image" style="max-width: 100px;">
+        <img class="navbar-brand" src="assets/rentify.png" class="rounded" [routerLink]="['/property']"
+            class="navbar-brand ms-3" alt="Rentify Image" style="max-width: 100px;">
 
         <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#rentify-navbar">
             <span class="navbar-toggler-icon"></span>
@@ -39,8 +42,7 @@
             </ul>
             <div class="ms-auto" *ngIf="userService.user">
                 Welcome {{userService.user.name}}
-                <img [routerLink]="['profile', userService.user.id]"
-                    [src]="apiService.getImageUrl(userService.user.image)" alt="Profile image"
+                <img [src]="apiService.getImageUrl(userService.user.image)" alt="Profile image"
                     class="image-fluid rounded-circle" style="max-width: 50px;">
                 <div style="max-width: 50px;">
 
