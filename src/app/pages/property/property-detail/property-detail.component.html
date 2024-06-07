@@ -27,18 +27,23 @@
     <img class="card-img-top image-fluid" [src]="property.image" alt="Property Image" style="max-width: 500px;">
     <div class="card-body">
       <h5 class="card-title">{{ property.place }}</h5>
-      <p class="card-text">Area: {{ property.area }}</p>
-      <p class="card-text">Bedrooms: {{ property.no_of_bedrooms }}</p>
-      <p class="card-text">Bathrooms: {{ property.no_of_bathrooms }}</p>
-      <p class="card-text">Floors: {{ property.no_of_floor }}</p>
-      <p class="card-text">Likes: {{ property.no_of_likes }}</p>
-      <h6 class="card-subtitle mb-2 text-muted">Nearby Amenities:</h6>
+      <p class="card-text"><strong>Area:</strong> {{ property.area }}</p>
+      <p class="card-text"><strong>Bedrooms:</strong> {{ property.no_of_bedrooms }}</p>
+      <p class="card-text"><strong>Bathrooms:</strong> {{ property.no_of_bathrooms }}</p>
+      <p class="card-text"><strong>Floors:</strong> {{ property.no_of_floor }}</p>
+      <p class="card-text"><strong>Likes:</strong> {{ property.no_of_likes }}</p>
+      <p *ngIf='property.url'>
+        <strong>Location:</strong><a href="{{ property.url }}" class="btn btn-outline-primary" target="_blank">Click Here</a>
+      </p>
+
+      <h6 class="card-subtitle mb-2 text-muted mt-3"><strong>Nearby Amenities:</strong></h6>
       <ul class="list-group">
-        <li class="list-group-item" *ngFor="let amenity of property.nearby">
-          <strong>{{ amenity.name }}</strong> - {{ amenity.type }} ({{ amenity.location }})
-        </li>
+          <li class="list-group-item" *ngFor="let amenity of property.nearby">
+              <strong>{{ amenity.name }}</strong> - {{ amenity.type }} ({{ amenity.location }})
+          </li>
       </ul>
-    </div>
+  </div>
+  
     <div class="card-footer">
       <button class="btn" (click)="addLike()">Like</button>
       <button class="btn" (click)="addInterest()">I'm Interested</button>

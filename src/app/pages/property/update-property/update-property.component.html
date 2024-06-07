@@ -48,6 +48,14 @@
         No of Floors required and should be greater than zero
       </div>
     </div>
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" placeholder="Location Link" formControlName='url'>
+      <label for="">Location Link</label>
+      <div *ngIf="propertyForm.get('url')?.invalid && propertyForm.get('url')?.touched"
+        class="text-danger">
+        location Link must be a link
+      </div>
+    </div>
     <div *ngFor="let nearby of nearbyPlaces">
       <label>
         <input type="checkbox" [value]="nearby.id" (change)="toggleNearbySelection(nearby.id)"

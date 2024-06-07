@@ -7,6 +7,7 @@ import { AlertService } from 'src/app/alert/alert.service';
 import { ApiService } from 'src/app/service/api.service';
 import { FormDataService } from 'src/app/service/formdata.service';
 import { UserService } from 'src/app/service/user.service';
+import { urlValidator } from 'src/app/service/validators.service';
 
 @Component({
   selector: 'app-update-property',
@@ -27,6 +28,7 @@ export class UpdatePropertyComponent {
     no_of_bedrooms: ['', [Validators.required, Validators.min(0)]],
     no_of_bathrooms: ['', [Validators.required, Validators.min(0)]],
     no_of_floor: ['', [Validators.required, Validators.min(0)]],
+    url: ['', [Validators.required, urlValidator], ],
     nearby: [[]]
   });
 
@@ -61,7 +63,8 @@ export class UpdatePropertyComponent {
           'no_of_bathrooms': this.property.no_of_bathrooms,
           'no_of_floor': this.property.no_of_floor,
           'image': this.property.image,
-          'imageUrl': this.property.image
+          'imageUrl': this.property.image,
+          'url': this.property.url
         });
 
       }
