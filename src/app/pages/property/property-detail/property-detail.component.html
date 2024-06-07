@@ -26,8 +26,8 @@
     </div>
     <img class="card-img-top image-fluid" [src]="property.image" alt="Property Image" style="max-width: 500px;">
     <div class="card-body">
-      <h5 class="card-title">{{ property.place }}</h5>
-      <p class="card-text"><strong>Area:</strong> {{ property.area }}</p>
+      <h5 class="card-title">{{ property.place|titlecase }}</h5>
+      <p class="card-text"><strong>Area:</strong> {{ property.area|titlecase }}</p>
       <p class="card-text"><strong>Bedrooms:</strong> {{ property.no_of_bedrooms }}</p>
       <p class="card-text"><strong>Bathrooms:</strong> {{ property.no_of_bathrooms }}</p>
       <p class="card-text"><strong>Floors:</strong> {{ property.no_of_floor }}</p>
@@ -39,7 +39,7 @@
       <h6 class="card-subtitle mb-2 text-muted mt-3"><strong>Nearby Amenities:</strong></h6>
       <ul class="list-group">
           <li class="list-group-item" *ngFor="let amenity of property.nearby">
-              <strong>{{ amenity.name }}</strong> - {{ amenity.type }} ({{ amenity.location }})
+              <strong>{{ amenity.name|titlecase }}</strong> - {{ amenity.type|titlecase }} ({{ amenity.location|titlecase }})
           </li>
       </ul>
   </div>

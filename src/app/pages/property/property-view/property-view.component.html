@@ -31,6 +31,6 @@
         </div>
     </div>
     <div class="card-footer text-center" [routerLink]="['/property', property.id]">
-        {{property.place}}({{property.area}})
+        {{property.place|titlecase}}({{property.area|titlecase}})
     </div>
 </div>

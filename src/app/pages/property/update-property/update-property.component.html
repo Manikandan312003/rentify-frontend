@@ -51,19 +51,17 @@
     <div class="form-floating mb-3">
       <input type="text" class="form-control" placeholder="Location Link" formControlName='url'>
       <label for="">Location Link</label>
-      <div *ngIf="propertyForm.get('url')?.invalid && propertyForm.get('url')?.touched"
-        class="text-danger">
+      <div *ngIf="propertyForm.get('url')?.invalid && propertyForm.get('url')?.touched" class="text-danger">
         location Link must be a link
       </div>
     </div>
-    <div *ngFor="let nearby of nearbyPlaces">
-      <label>
-        <input type="checkbox" [value]="nearby.id" (change)="toggleNearbySelection(nearby.id)"
-          [checked]="selectedNearbyIds.includes(nearby.id)">
-
-        {{ nearby.name }} - {{ nearby.type }} - {{ nearby.location }}
-      </label>
-    </div>
+    <ng-container *ngFor="let nearby of nearbyPlaces">
+      <input type="checkbox" class="btn-check" [id]="nearby.id" autocomplete="off"
+        (change)="toggleNearbySelection(nearby.id)" [checked]="selectedNearbyIds.includes(nearby.id)">
+      <label class="btn btn-outline-success mb-2" [for]="nearby.id">{{ nearby.name|titlecase }}({{nearby.type|titlecase}}) at
+        {{nearby.location|titlecase}}</label>
+      <br>
+    </ng-container>
     <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#addnearby">Add
       Nearby</button>
     <button class="btn btn-primary">Submit</button>

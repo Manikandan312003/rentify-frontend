@@ -1,12 +1,7 @@
-<div class="card mt-3 navbar navbar-expand-md">
-    <button class="navbar-brand btn d-md-none " data-bs-toggle="collapse" data-bs-target="#property-filter-navbar">Filter Properties</button>
-    <div class="navbar-brand d-none d-md-block" >Filter Properties</div>
-
-
-    <!-- <button class="navbar-brand btn" data-bs-toggle="collapse" data-bs-target="#property-filter-navbar">Filter Properties</button> -->
-    <!-- <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#property-filter-navbar">
-        <span class="navbar-toggler-icon"></span>
-    </button> -->
+<div class="card mt-3 navbar ">
+    <button class="navbar-brand btn  btn-info" data-bs-toggle="collapse"
+        data-bs-target="#property-filter-navbar">Filter Properties</button>
+    <!-- <div class="navbar-brand d-none d-md-block">Filter Properties</div> -->
     <div class="navbar-collapse collapse card-body" id="property-filter-navbar">
         <div class="row">
 
@@ -15,26 +10,73 @@
                     [(ngModel)]="searchPlace" (input)="applyFilters()">
                 <label class="ms-2" for="searchPlace">Search by Place</label>
             </div>
+
             <div class="form-floating col-md-4 col-sm-6 mb-3">
-                <input type="number" class="form-control" id="minBedrooms" placeholder="minBedrooms"
-                    [(ngModel)]="minBedrooms" (input)="applyFilters()">
-                <label class="ms-2" for="minBedrooms">Minimum Bedrooms</label>
-            </div>
-            <div class="form-floating col-md-4 col-sm-6 mb-3">
-                <input type="number" class="form-control" id="minBathrooms" placeholder="minBathrooms"
-                    [(ngModel)]="minBathrooms" (input)="applyFilters()">
-                <label class="ms-2" for="minBathrooms">Minimum Bathrooms</label>
-            </div>
-            <div class="form-floating col-md-4 col-sm-6 mb-3">
-                <input type="number" class="form-control" id="minFloors" placeholder="minFloors" [(ngModel)]="minFloors"
+                <input type="text" class="form-control" id="area" placeholder="area" [(ngModel)]="area"
                     (input)="applyFilters()">
-                <label class="ms-2" for="minFloors">Minimum Floors</label>
+                <label class="ms-2" for="area">Area</label>
             </div>
+
             <div class="form-floating col-md-4 col-sm-6 mb-3">
-                <input type="text" class="form-control" id="nearby" placeholder="nearby" [(ngModel)]="nearby"
+                <input type="text" class="form-control" id="nearby" placeholder="nearby" [(ngModel)]="nearbyName"
                     (input)="applyFilters()">
-                <label class="ms-2" for="nearby">Nearby</label>
+                <label class="ms-2" for="nearby">Nearby Location(Name)</label>
             </div>
+
+            <div class="form-floating col-md-4 col-sm-6 mb-3">
+                <input type="text" class="form-control" id="nearby" placeholder="nearby" [(ngModel)]="nearbyType"
+                    (input)="applyFilters()">
+                <label class="ms-2" for="nearby">Nearby Type(Hospital, ..)</label>
+            </div>
+
+            <div class="form col-md-4 col-sm-6 mb-3">
+                <label class="ms-2 text-center" for="minBedrooms">Bedrooms</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Min" aria-label="Min"
+                        [(ngModel)]="min_bedrooms" (input)="applyFilters()">
+                    <input type="text" class="form-control" placeholder="Equal" aria-label="Equal"
+                        [(ngModel)]="equal_bedrooms" (input)="applyFilters()">
+                    <input type="text" class="form-control" placeholder="Max" aria-label="Max"
+                        [(ngModel)]="max_bedrooms" (input)="applyFilters()">
+                </div>
+            </div>
+
+            <div class="form col-md-4 col-sm-6 mb-3">
+                <label class="ms-2 text-center" for="minBedrooms">Bathroom</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Min" aria-label="Min"
+                        [(ngModel)]="min_bathrooms" (input)="applyFilters()">
+                    <input type="text" class="form-control" placeholder="Equal" aria-label="Equal"
+                        [(ngModel)]="equal_bathrooms" (input)="applyFilters()">
+                    <input type="text" class="form-control" placeholder="Max" aria-label="Max"
+                        [(ngModel)]="max_bathrooms" (input)="applyFilters()">
+                </div>
+            </div>
+
+            <div class="form col-md-4 col-sm-6 mb-3">
+                <label class="ms-2 text-center" for="minBedrooms">Floors</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Min" aria-label="Min" [(ngModel)]="min_floor"
+                        (input)="applyFilters()">
+                    <input type="text" class="form-control" placeholder="Equal" aria-label="Equal"
+                        [(ngModel)]="equal_floor" (input)="applyFilters()">
+                    <input type="text" class="form-control" placeholder="Max" aria-label="Max" [(ngModel)]="max_floor"
+                        (input)="applyFilters()">
+                </div>
+            </div>
+
+            <div class="form col-md-4 col-sm-6 mb-3">
+                <label class="ms-2 text-center" for="minBedrooms">Likes</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Min" aria-label="Min" [(ngModel)]="min_likes"
+                        (input)="applyFilters()">
+                    <input type="text" class="form-control" placeholder="Equal" aria-label="Equal"
+                        [(ngModel)]="equal_likes" (input)="applyFilters()">
+                    <input type="text" class="form-control" placeholder="Max" aria-label="Max" [(ngModel)]="max_likes"
+                        (input)="applyFilters()">
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

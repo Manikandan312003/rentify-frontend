@@ -27,21 +27,21 @@
         <div class="navbar-collapse collapse" id="rentify-navbar">
             <ul class="navbar-nav">
                 <li class="nav-item" *ngIf="userService.user">
-                    <a routerLinkActive="active text-primary" [routerLink]="['/property']"
-                        class="nav-link">Properties</a>
+                    <button routerLinkActive="active text-primary" [routerLink]="['/property']"
+                        class="nav-link">Properties</button>
                 </li>
                 <li class="nav-item" *ngIf="!userService.user">
-                    <a routerLinkActive="active text-primary" [routerLink]="['/login']" class="nav-link">Login</a>
+                    <button routerLinkActive="active text-primary" [routerLink]="['/login']" class="nav-link">Login</button>
                 </li>
                 <li class="nav-item">
-                    <a routerLinkActive="active text-primary" [routerLink]="['/register']" class="nav-link">Register</a>
+                    <button routerLinkActive="active text-primary" [routerLink]="['/register']" class="nav-link">Register</button>
                 </li>
                 <li class="nav-item" *ngIf="userService.user">
                     <button data-bs-target="#logout" data-bs-toggle="modal" class="nav-link">Logout</button>
                 </li>
             </ul>
             <div class="ms-auto" *ngIf="userService.user">
-                Welcome {{userService.user.name}}
+                Welcome {{userService.user.name|titlecase}}
                 <img [src]="apiService.getImageUrl(userService.user.image)" alt="Profile image"
                     class="image-fluid rounded-circle" style="max-width: 50px;">
                 <div style="max-width: 50px;">

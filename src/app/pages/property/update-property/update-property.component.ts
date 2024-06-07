@@ -28,7 +28,7 @@ export class UpdatePropertyComponent {
     no_of_bedrooms: ['', [Validators.required, Validators.min(0)]],
     no_of_bathrooms: ['', [Validators.required, Validators.min(0)]],
     no_of_floor: ['', [Validators.required, Validators.min(0)]],
-    url: ['', [Validators.required, urlValidator], ],
+    url: ['', [Validators.required, urlValidator],],
     nearby: [[]]
   });
 
@@ -114,6 +114,9 @@ export class UpdatePropertyComponent {
     if (this.isEditing) {
       if (!(this.propertyForm.controls['image']?.value instanceof File)) {
         this.propertyForm.removeControl('image')
+      }
+      if ((this.propertyForm.controls['url']?.value === null)) {
+        this.propertyForm.removeControl('url')
       }
       this.apiService.patch(`property/${this.propertyId}/`, FormDataService.formGrouptoData(this.propertyForm)).subscribe(
         (data) => {

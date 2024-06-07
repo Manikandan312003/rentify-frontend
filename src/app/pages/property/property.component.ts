@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnChanges, SimpleChanges } from '@angular/core';
 import { ApiService } from 'src/app/service/api.service';
 import { PropertyService } from './property.service';
 import { Subscription } from 'rxjs';
@@ -12,6 +12,7 @@ export class PropertyComponent {
   properties: any[] = [];
   nextPageNumber: number | null = null;
   private propertyDeletedSubscription: Subscription | undefined;
+  apiUrl: string = 'property'
 
   constructor(private apiService: ApiService, private propertyService: PropertyService) { }
 
@@ -24,20 +25,25 @@ export class PropertyComponent {
       }
     );
   }
-
   ngOnDestroy(): void {
     this.propertyDeletedSubscription?.unsubscribe();
   }
 
   loadProperties(pageNumber?: number): void {
-    let apiUrl = 'property';
+
     if (pageNumber) {
-      apiUrl += `?page=${pageNumber}`;
+      if (this.apiUrl.includes('?')) {
+        this.apiUrl += `&page=${pageNumber}`;
+
+      }
+      else {
+        this.apiUrl += `?page=${pageNumber}`;
+      }
     }
-    this.apiService.get(apiUrl).subscribe(
+    this.apiService.get(this.apiUrl).subscribe(
       (data) => {
         if (Array.isArray(this.properties)) {
-          this.properties = [...this.properties, ...data.results];
+          this.properties.push(...data.results);
         } else {
           this.properties = data.results;
         }
@@ -52,7 +58,11 @@ export class PropertyComponent {
 
   @HostListener('window:scroll', [])
   onScroll(): void {
-    if ((window.innerHeight + window.scrollY) > (document.body.scrollHeight+7)) {
+    this.checkEnd()
+  }
+
+  checkEnd() {
+    if ((window.innerHeight + window.scrollY) > (document.body.scrollHeight + 7)) {
       this.loadNextPage();
     }
   }
@@ -60,26 +70,27 @@ export class PropertyComponent {
   loadNextPage(): void {
     if (this.nextPageNumber) {
       this.loadProperties(this.nextPageNumber);
+      this.nextPageNumber=null
     }
   }
 
   applyFilters(filters: any): void {
-    let apiUrl = 'property';
+    this.apiUrl = 'property';
     let isFirstFilter = true;
     for (const key in filters) {
       if (filters.hasOwnProperty(key) && filters[key]) {
         if (isFirstFilter) {
-          apiUrl += `?${key}=${filters[key]}`;
+          this.apiUrl += `?${key}=${filters[key]}`;
           isFirstFilter = false;
         } else {
-          apiUrl += `&${key}=${filters[key]}`;
+          this.apiUrl += `&${key}=${filters[key]}`;
         }
       }
     }
 
     this.properties = [];
 
-    this.apiService.get(apiUrl).subscribe(
+    this.apiService.get(this.apiUrl).subscribe(
       (data) => {
         this.properties = data.results;
         this.nextPageNumber = this.getPageNumberFromUrl(data.next);
