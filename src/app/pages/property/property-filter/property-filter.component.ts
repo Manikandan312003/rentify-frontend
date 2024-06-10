@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Output } from '@angular/core';
 
 @Component({
   selector: 'app-property-filter',
@@ -22,7 +22,7 @@ export class PropertyFilterComponent {
   equal_likes: number | undefined
   max_likes: number | undefined
   nearbyName: string = ''
-  nearbyType:string=''
+  nearbyType: string = ''
   constructor() { }
 
   applyFilters() {
@@ -30,7 +30,7 @@ export class PropertyFilterComponent {
       area: this.area,
       nearby_name: this.nearbyName,
       nearby_type: this.nearbyType,
-      place:this.searchPlace,
+      place: this.searchPlace,
 
       min_no_of_bedrooms: this.min_bedrooms,
       equal_no_of_bedrooms: this.equal_bedrooms,
@@ -51,5 +51,22 @@ export class PropertyFilterComponent {
 
     };
     this.filtersChanged.emit(filters);
+  }
+
+  isSmallScreen = false;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkScreenSize();
+  }
+
+  ngOnInit() {
+    this.checkScreenSize();
+
+  }
+
+  checkScreenSize() {
+
+    this.isSmallScreen = window.innerWidth < 768;
   }
 }
