@@ -1,4 +1,27 @@
-<app-property-filter (filtersChanged)="applyFilters($event)"></app-property-filter>
+<div class="card mt-3 navbar ">
+    <button class="navbar-brand btn  btn-info d-md-block d-none" data-bs-toggle="collapse"
+        data-bs-target="#property-filter-navbar">Filter Properties</button>
+    <div class="navbar-collapse collapse card-body" id="property-filter-navbar">
+        <app-property-filter (filtersChanged)="applyFilters($event)" class="d-none d-md-block"></app-property-filter>
+    </div>
+    <button class="navbar-brand btn  btn-info d-md-none" data-bs-toggle="modal" data-bs-target="#property-filter-modal">Filter Properties</button>
+</div>
+<!-- For small Devices -->
+<div class="modal" id="property-filter-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                Filter Properties
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <app-property-filter (filtersChanged)="applyFilters($event)" class="d-md-none"></app-property-filter>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div *ngIf="properties" class="container card p-3 mt-5">
     <h2 class="card-header d-flex justify-content-between align-items-center">
         <button class="btn btn-primary ml-2" routerLink="create">Add property</button>
@@ -7,15 +30,14 @@
     <div class="card-body">
         <div class="row">
             <div *ngFor="let property of properties" class="col-md-6 col-lg-4 mt-3 ">
-                <app-property-view [property]="property" >
-                    
+                <app-property-view [property]="property">
+
                 </app-property-view>
             </div>
         </div>
     </div>
     <div class="card-footer d-flex justify-content-center" *ngIf="nextPageNumber">
-        <button (click)="loadNextPage()" class="btn btn-secondary" >Show More</button>
+        <button (click)="loadNextPage()" class="btn btn-secondary">Show More</button>
     </div>
-    
-  </div>
-  
+
+</div>
